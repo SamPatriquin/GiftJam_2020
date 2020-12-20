@@ -8,12 +8,12 @@ public class ProjectilePathController : MonoBehaviour
     [SerializeField] float distBetweenPoints = 5f;
     [SerializeField] Sprite pointSprite;
 
-    private MovementController parentMovementController;
+    private PlayerMovementController parentMovementController;
     private ProjectilePathComponent projectilePath;
 
     private void Awake() {
         projectilePath = new ProjectilePathComponent(numPoints, distBetweenPoints, pointSprite, this.transform);
-        parentMovementController = GetComponentInParent<MovementController>();
+        parentMovementController = GetComponentInParent<PlayerMovementController>();
     }
 
     private void FixedUpdate() {
