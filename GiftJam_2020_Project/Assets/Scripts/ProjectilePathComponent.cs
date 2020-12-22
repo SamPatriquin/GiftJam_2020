@@ -30,7 +30,7 @@ public class ProjectilePathComponent
         }
     }
 
-    public void stopRenderProjectilePath() {
+    public void StopRenderProjectilePath() {
         foreach (GameObject point in points) {
             point.SetActive(false);
         }

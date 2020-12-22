@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInBubbleHandler : MonoBehaviour {
+public class OnPlayerWithBubble : MonoBehaviour {
 
     private Rigidbody2D playerRigidBody;
     private CircleCollider2D playerCollider;

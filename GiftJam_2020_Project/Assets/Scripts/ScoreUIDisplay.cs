@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreTextUpdate : MonoBehaviour
+public class ScoreUIDisplay : MonoBehaviour
 {
     [SerializeField] Score score;
     

@@ -7,7 +7,7 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody2D playerRigidBody;
     private CircleCollider2D playerCollider;
     private Transform playerTransform;
-    private PlayerInBubbleHandler bubbleHandler;
+    private OnPlayerWithBubble onPlayerWithBubble;
 
     public Vector2 launchVelocity { get; private set; }
     public bool isValidMove { get; private set; } = false;
@@ -19,11 +19,11 @@ public class PlayerMovementController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CircleCollider2D>();
         playerTransform = GetComponent<Transform>();
-        bubbleHandler = GetComponent<PlayerInBubbleHandler>();
+        onPlayerWithBubble = GetComponent<OnPlayerWithBubble>();
     }
     private void FixedUpdate() {
         if (isValidMove) {
-            launchVelocity = ((Vector2)this.transform.position - mousePos) * bubbleHandler.currentBubble.launchMultiplier * Time.deltaTime;
+            launchVelocity = ((Vector2)this.transform.position - mousePos) * onPlayerWithBubble.currentBubble.launchMultiplier * Time.deltaTime;
         }
         if (isMoveReleased ) {
             playerRigidBody.isKinematic = false;
@@ -34,7 +34,7 @@ public class PlayerMovementController : MonoBehaviour
     private void Update() {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0)) {
-            isValidMove = playerCollider.OverlapPoint(mousePos) && bubbleHandler.isPlayerInBubble;
+            isValidMove = playerCollider.OverlapPoint(mousePos) && onPlayerWithBubble.isPlayerInBubble;
         }
         if (isValidMove && Input.GetMouseButtonUp(0)) {
             isMoveReleased = true;

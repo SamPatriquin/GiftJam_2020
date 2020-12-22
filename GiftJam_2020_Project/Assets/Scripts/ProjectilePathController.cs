@@ -21,7 +21,7 @@ public class ProjectilePathController : MonoBehaviour
             projectilePath.CalculateProjectilePathPoints(this.transform.position, parentMovementController.launchVelocity);
             projectilePath.RenderProjectilePath();
         } else {
-            projectilePath.stopRenderProjectilePath();
+            projectilePath.StopRenderProjectilePath();
         }
     }
 }
