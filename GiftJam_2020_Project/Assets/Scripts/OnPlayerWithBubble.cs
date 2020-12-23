@@ -8,11 +8,15 @@ public class OnPlayerWithBubble : MonoBehaviour {
     public bool isPlayerInBubble { get; private set; } = true;
 
     private Rigidbody2D playerRigidBody;
-    private CircleCollider2D playerCollider;
 
     private void Awake() {
-        playerCollider = GetComponent<CircleCollider2D>();
         playerRigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update() {
+        if (isPlayerInBubble) {
+            this.transform.position = Vector2.Lerp(this.transform.position, currentBubble.transform.position, 5f * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -21,7 +25,6 @@ public class OnPlayerWithBubble : MonoBehaviour {
             currentBubble = collision.gameObject.GetComponent<Bubble>();
             playerRigidBody.velocity = Vector2.zero;
             playerRigidBody.isKinematic = true;
-            StartCoroutine(TweenPlayerToBubble());
         }
     }
 
@@ -31,10 +34,5 @@ public class OnPlayerWithBubble : MonoBehaviour {
         }
     }
 
-    IEnumerator TweenPlayerToBubble() {
-        while (this.transform.position != currentBubble.transform.position) {
-            this.transform.position = Vector2.Lerp(this.transform.position, currentBubble.transform.position, 1f * Time.deltaTime);
-        }
-        yield return null;
-    }
+  
 }

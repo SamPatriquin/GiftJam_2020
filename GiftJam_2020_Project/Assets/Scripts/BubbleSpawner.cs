@@ -8,6 +8,7 @@ public class BubbleSpawner : MonoBehaviour {
     [SerializeField] private ObjectPool bubblePool;
     [SerializeField] private float xOffset;
     [SerializeField] private float maxHeight;
+    [SerializeField] private int maxBubbles;
 
     private Vector2 lastSpawnPos = new Vector2(0f, 0f);
     private int numBubbles = 0;
@@ -20,9 +21,9 @@ public class BubbleSpawner : MonoBehaviour {
     }
 
     private void Update() {
-        if (numBubbles < 4) {
+        if (numBubbles < maxBubbles) {
             GameObject bubble = bubblePool.GetObject(bubblePrefabs[0]);
-            bubble.transform.position = new Vector2(lastSpawnPos.x + Random.Range(xOffset-2, xOffset+2), Random.Range(-maxHeight, maxHeight));
+            bubble.transform.position = new Vector2(lastSpawnPos.x + Random.Range(xOffset-1, xOffset+1), Random.Range(-maxHeight, maxHeight));
             lastSpawnPos = bubble.transform.position;
             ++numBubbles;
         }

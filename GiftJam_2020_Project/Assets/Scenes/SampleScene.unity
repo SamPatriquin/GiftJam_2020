@@ -750,8 +750,9 @@ MonoBehaviour:
   bubblePrefabs:
   - {fileID: 4397240384071086403, guid: da051cc026cb18a4dad36c93ca38fb02, type: 3}
   bubblePool: {fileID: 286083062}
-  xOffset: 6
+  xOffset: 7
   maxHeight: 4.5
+  maxBubbles: 10
 --- !u!4 &1540504740
 Transform:
   m_ObjectHideFlags: 0
@@ -760,7 +761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540504738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.20286703, y: 0.033190526, z: -10.026847}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -825,8 +826,8 @@ GameObject:
   - component: {fileID: 2017748819}
   - component: {fileID: 2017748821}
   - component: {fileID: 2017748823}
-  - component: {fileID: 2017748822}
   - component: {fileID: 2017748824}
+  - component: {fileID: 2017748822}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -912,8 +913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dea4763ea3a7c541b2167c3004ebf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &2017748822
-CircleCollider2D:
+--- !u!70 &2017748822
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -925,9 +926,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.05}
-  serializedVersion: 2
-  m_Radius: 0.13092518
+  m_Offset: {x: -0.13558997, y: 0.018546332}
+  m_Size: {x: 0.9333621, y: 0.4253043}
+  m_Direction: 1
 --- !u!50 &2017748823
 Rigidbody2D:
   serializedVersion: 4

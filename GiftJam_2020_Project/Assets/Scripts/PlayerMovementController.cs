@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
     private Rigidbody2D playerRigidBody;
-    private CircleCollider2D playerCollider;
+    private Collider2D playerCollider;
     private Transform playerTransform;
     private OnPlayerWithBubble onPlayerWithBubble;
 
@@ -17,7 +17,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Awake() {
         playerRigidBody = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<CircleCollider2D>();
+        playerCollider = GetComponent<Collider2D>();
         playerTransform = GetComponent<Transform>();
         onPlayerWithBubble = GetComponent<OnPlayerWithBubble>();
     }
