@@ -39,10 +39,10 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Bubbles
-    uniqueID: 2968684677
+    uniqueID: 982890237
     locked: 0
   - name: Player
-    uniqueID: 179019017
+    uniqueID: 2067371645
     locked: 0
   - name: Default
     uniqueID: 0

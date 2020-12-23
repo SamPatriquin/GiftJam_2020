@@ -31,6 +31,7 @@ public class ObjectPool : MonoBehaviour
     private GameObject CreateObject(GameObject gameObject) {
         GameObject newObj = Instantiate(gameObject);
         newObj.name = gameObject.name;
+        newObj.transform.parent = this.transform;
         return newObj;
     }
 }
