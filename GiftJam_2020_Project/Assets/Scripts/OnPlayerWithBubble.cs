@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnPlayerWithBubble : MonoBehaviour {
 
     public Bubble currentBubble;
-    public bool isPlayerInBubble { get; private set; } = true;
+    public bool isPlayerInBubble { get; private set; } = false;
 
     private Rigidbody2D playerRigidBody;
 

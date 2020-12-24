@@ -5,7 +5,7 @@ using UnityEngine;
 public class BubbleSpawner : MonoBehaviour {
 
     [SerializeField] private GameObject[] bubblePrefabs; //Regular=0, Fast=1
-    [SerializeField] private ObjectPool bubblePool;
+    [SerializeField] private ObjectPool pool;
     [SerializeField] private float xOffset;
     [SerializeField] private float maxHeight;
     [SerializeField] private int maxBubbles;
@@ -14,7 +14,7 @@ public class BubbleSpawner : MonoBehaviour {
     private int numBubbles = 0;
 
     private void Awake() {
-        GameObject bubble = bubblePool.GetObject(bubblePrefabs[0]);
+        GameObject bubble = pool.GetObject(bubblePrefabs[0]);
         if (bubble.GetComponent<Bubble>() != null) { bubble.GetComponent<Bubble>().spawnedFrom = this; }
         bubble.transform.position = new Vector2(0f, 0f);
         ++numBubbles;
@@ -22,7 +22,7 @@ public class BubbleSpawner : MonoBehaviour {
 
     private void Update() {
         if (numBubbles < maxBubbles) {
-            GameObject bubble = bubblePool.GetObject(bubblePrefabs[0]);
+            GameObject bubble = pool.GetObject(bubblePrefabs[0]);
             if (bubble.GetComponent<Bubble>() != null) { bubble.GetComponent<Bubble>().spawnedFrom = this; }
             bubble.transform.position = new Vector2(lastSpawnPos.x + Random.Range(xOffset-1, xOffset+1), Random.Range(-maxHeight, maxHeight));
             lastSpawnPos = bubble.transform.position;
@@ -31,7 +31,7 @@ public class BubbleSpawner : MonoBehaviour {
     }
 
     public void ReturnBubble(GameObject bubble) {
-        bubblePool.ReturnObject(bubble);
+        pool.ReturnObject(bubble);
         --numBubbles;
     }
 }
