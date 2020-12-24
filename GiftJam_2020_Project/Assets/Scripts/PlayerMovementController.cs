@@ -11,7 +11,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public Vector2 launchVelocity { get; private set; }
     public bool isValidMove { get; private set; } = false;
-    public bool isMoveReleased { get; private set; } = false;
+    private bool isMoveReleased = false;
 
     private Vector2 mousePos;
 

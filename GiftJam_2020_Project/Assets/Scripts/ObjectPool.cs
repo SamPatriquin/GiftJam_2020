@@ -11,7 +11,9 @@ public class ObjectPool : MonoBehaviour
             if (objQueue.Count == 0) {
                 return CreateObject(gameObject);
             } else {
-                return objQueue.Dequeue();
+                GameObject obj = objQueue.Dequeue();
+                obj.SetActive(true);
+                return obj;
             }
         } else {
             return CreateObject(gameObject);
@@ -21,10 +23,12 @@ public class ObjectPool : MonoBehaviour
     public void ReturnObject(GameObject gameObject) {
         if (pool.TryGetValue(gameObject.name, out Queue<GameObject> objQueue)){
             objQueue.Enqueue(gameObject);
+            gameObject.SetActive(false);
         } else {
             Queue<GameObject> newQueue = new Queue<GameObject>();
             newQueue.Enqueue(gameObject);
             pool.Add(gameObject.name, newQueue);
+            gameObject.SetActive(false);
         }
     }
 
