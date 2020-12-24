@@ -3,16 +3,12 @@ using UnityEngine;
 
 public class CoinPickup : MonoBehaviour
 {
-    [SerializeField] 
-    private int value;
-
-    public static event Action<int> onCoinPickup;
+    [SerializeField] private int value;
+    [SerializeField] private Score score;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.GetComponent<PlayerMovementController>()) {
-            if (onCoinPickup != null) {
-                onCoinPickup(this.value);
-            }
+            score.IncreaseScore(this.value);
         }
     }
 }

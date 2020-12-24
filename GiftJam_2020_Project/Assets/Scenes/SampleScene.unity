@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211052342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1645572, y: -0.27827758, z: -9.467194}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPoints: 3
-  distBetweenPoints: 0.075
+  distBetweenPoints: 0.1
   pointSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &1540504738
 GameObject:
@@ -752,7 +752,7 @@ MonoBehaviour:
   bubblePool: {fileID: 286083062}
   xOffset: 7
   maxHeight: 4.5
-  maxBubbles: 10
+  maxBubbles: 30
 --- !u!4 &1540504740
 Transform:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 2143786943}
   - component: {fileID: 2143786942}
   m_Layer: 0
-  m_Name: Coin (1)
+  m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,6 +1095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 10
+  score: {fileID: 211052344}
 --- !u!58 &2143786943
 CircleCollider2D:
   m_ObjectHideFlags: 0
