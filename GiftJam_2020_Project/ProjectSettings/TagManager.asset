@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2963770847
+    locked: 0
   - name: Bubbles
     uniqueID: 982890237
     locked: 0
