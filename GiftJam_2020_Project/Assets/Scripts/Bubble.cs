@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    [SerializeField] float _launchMultiplier = 5f;
+    [SerializeField] private float _launchMultiplier = 5f;
     public BubbleSpawner spawnedFrom { get; set; }
 
     public float launchMultiplier {

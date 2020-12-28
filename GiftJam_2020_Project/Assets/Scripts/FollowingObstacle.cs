@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrierFollow : MonoBehaviour
+public class FollowingObstacle: MonoBehaviour, IObstacle
 {
     [SerializeField] Transform target;
 

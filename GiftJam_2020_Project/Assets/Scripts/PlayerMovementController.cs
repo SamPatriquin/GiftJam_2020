@@ -38,6 +38,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         if (isValidMove && Input.GetMouseButtonUp(0)) {
             isMoveReleased = true;
+            onPlayerWithBubble.isPlayerInBubble = false;
             isValidMove = false;
         }
     }

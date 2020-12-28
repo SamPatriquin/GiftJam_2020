@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class OnPlayerWithBubble : MonoBehaviour {
 
-    public Bubble currentBubble;
-    public bool isPlayerInBubble { get; private set; } = false;
+    public Bubble currentBubble { get; private set; }
+    public bool isPlayerInBubble { get; set; } = false;
 
     private Rigidbody2D playerRigidBody;
 
