@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
+    [SerializeField] private float secondJumpMult = 2f;
+
     private Rigidbody2D playerRigidBody;
     private Collider2D playerCollider;
     private Transform playerTransform;
@@ -12,6 +14,7 @@ public class PlayerMovementController : MonoBehaviour
     public Vector2 launchVelocity { get; private set; }
     public bool isValidMove { get; private set; } = false;
     private bool isMoveReleased = false;
+    private bool isSecondJumpUsed = false;
 
     private Vector2 mousePos;
 
@@ -25,16 +28,23 @@ public class PlayerMovementController : MonoBehaviour
         if (isValidMove) {
             launchVelocity = ((Vector2)this.transform.position - mousePos) * onPlayerWithBubble.currentBubble.launchMultiplier * Time.deltaTime;
         }
-        if (isMoveReleased ) {
+        if (isMoveReleased) {
             playerRigidBody.isKinematic = false;
             playerRigidBody.velocity = launchVelocity;
             isMoveReleased = false;
+        }
+        if (isSecondJumpUsed) {
+            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, secondJumpMult * Time.deltaTime);
+            isSecondJumpUsed = false;
         }
     }
     private void Update() {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0)) {
             isValidMove = playerCollider.OverlapPoint(mousePos) && onPlayerWithBubble.isPlayerInBubble;
+            if (onPlayerWithBubble.isPlayerInBubble == false) {
+                isSecondJumpUsed = true;
+            }
         }
         if (isValidMove && Input.GetMouseButtonUp(0)) {
             isMoveReleased = true;
