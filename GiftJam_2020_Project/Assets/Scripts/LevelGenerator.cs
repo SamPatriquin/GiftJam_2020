@@ -24,23 +24,19 @@ public class LevelGenerator : MonoBehaviour {
 
 
     private Vector2 lastBubbleSpawnPos;
-    private Vector2 lastCoinSpawnPos;
 
     private int numBubbles = 0;
     private int numCoins = 0;
 
     private void Awake() {
         lastBubbleSpawnPos = SpawnBubble(Vector2.zero);
-        lastCoinSpawnPos = SpawnCoinFormation(new Vector2(0 + Random.Range(minSpawnDist, maxSpawnDist)/2, Random.Range(-maxHeight, maxHeight) / 2));
     }
 
     private void Update() {
         print(numCoins);
         if (numBubbles < minBubbles) {
             lastBubbleSpawnPos = SpawnBubble(new Vector2(lastBubbleSpawnPos.x + Random.Range(minSpawnDist, maxSpawnDist), Random.Range(-maxHeight, maxHeight)));
-        }
-        if (numCoins < minCoins) {
-            lastCoinSpawnPos = SpawnCoinFormation(new Vector2(lastCoinSpawnPos.x + Random.Range(minSpawnDist, maxSpawnDist), Random.Range(-maxHeight, maxHeight)/2));
+            SpawnCoinFormation(new Vector2(lastBubbleSpawnPos.x + Random.Range(minSpawnDist, maxSpawnDist) / 2, Random.Range(lastBubbleSpawnPos.y - 1, lastBubbleSpawnPos.y + 1)));
         }
     }
 
@@ -53,7 +49,7 @@ public class LevelGenerator : MonoBehaviour {
         return bubble.transform.position;
     }
 
-    private Vector2 SpawnCoinFormation(Vector2 spawnAt) {
+    private void SpawnCoinFormation(Vector2 spawnAt) {
         CoinFormation formation = coinFormations[Random.Range(0, coinFormations.Length)];
         foreach (Vector2 pos in formation.coinPositons) {
             GameObject coin = pool.GetObject(coinPrefab);
@@ -62,7 +58,6 @@ public class LevelGenerator : MonoBehaviour {
             coin.transform.position = spawnAt + pos;
             ++numCoins;
         }
-        return spawnAt;
     }
 
     private void SpawnObstacle() {

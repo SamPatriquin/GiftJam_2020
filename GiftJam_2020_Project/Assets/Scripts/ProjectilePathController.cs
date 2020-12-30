@@ -17,7 +17,7 @@ public class ProjectilePathController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (parentMovementController.isValidMove) {
+        if (parentMovementController.isBubbleLaunch || parentMovementController.isSecondLaunch) {
             projectilePath.CalculateProjectilePathPoints(this.transform.position, parentMovementController.launchVelocity);
             projectilePath.RenderProjectilePath();
         } else {

@@ -12,9 +12,10 @@ public class PlayerMovementController : MonoBehaviour
     private OnPlayerWithBubble onPlayerWithBubble;
 
     public Vector2 launchVelocity { get; private set; }
-    public bool isValidMove { get; private set; } = false;
+    public bool isBubbleLaunch { get; private set; } = false;
     private bool isMoveReleased = false;
-    private bool isSecondJumpUsed = false;
+    private bool isSecondLaunchAvailable = false;
+    public bool isSecondLaunch { get; private set; } = false;
     private float clampMouseVector = 3f;
 
     private Vector2 mousePos;
@@ -26,31 +27,38 @@ public class PlayerMovementController : MonoBehaviour
         onPlayerWithBubble = GetComponent<OnPlayerWithBubble>();
     }
     private void FixedUpdate() {
-        if (isValidMove) {
+        if (isBubbleLaunch || isSecondLaunch) {
             launchVelocity = Vector2.ClampMagnitude(((Vector2)this.transform.position - mousePos), clampMouseVector) * onPlayerWithBubble.currentBubble.launchMultiplier * Time.deltaTime;
+            if (isSecondLaunch) {
+                playerRigidBody.velocity = new Vector2(0f, 0f);
+            }
         }
         if (isMoveReleased) {
             playerRigidBody.isKinematic = false;
             playerRigidBody.velocity = launchVelocity;
             isMoveReleased = false;
+            if (isSecondLaunch) {
+                isSecondLaunchAvailable = false;
+                isSecondLaunch = false;
+            } else if (isBubbleLaunch) {
+                isBubbleLaunch = false;
+            }
         }
-        if (isSecondJumpUsed) {
-            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, secondJumpMult * Time.deltaTime);
-            isSecondJumpUsed = false;
-        }
+    
     }
     private void Update() {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (onPlayerWithBubble.isPlayerInBubble) { isSecondLaunchAvailable = true; }
+
         if (Input.GetMouseButtonDown(0)) {
-            isValidMove = playerCollider.OverlapPoint(mousePos) && onPlayerWithBubble.isPlayerInBubble;
-            if (onPlayerWithBubble.isPlayerInBubble == false) {
-                isSecondJumpUsed = true;
-            }
+            isBubbleLaunch = playerCollider.OverlapPoint(mousePos) && onPlayerWithBubble.isPlayerInBubble;
+            isSecondLaunch = playerCollider.OverlapPoint(mousePos) && onPlayerWithBubble.isPlayerInBubble == false && isSecondLaunchAvailable;
         }
-        if (isValidMove && Input.GetMouseButtonUp(0)) {
+
+        if ((isBubbleLaunch || isSecondLaunch) && Input.GetMouseButtonUp(0)) {
             isMoveReleased = true;
             onPlayerWithBubble.isPlayerInBubble = false;
-            isValidMove = false;
         }
     }
 }
