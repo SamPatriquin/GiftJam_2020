@@ -156,7 +156,7 @@ Transform:
   - {fileID: 1871534407}
   - {fileID: 1871692382}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &57730747
 GameObject:
@@ -684,58 +684,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &485424136
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 485424137}
-  - component: {fileID: 485424138}
-  m_Layer: 0
-  m_Name: CoinSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &485424137
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485424136}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &485424138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485424136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeab84ddb497e4847af914a4eeb93c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pool: {fileID: 286083062}
-  coinPrefab: {fileID: 1641566331239349926, guid: ef11a43300571444b9cfc3272dd9c3cb,
-    type: 3}
-  coinFormations:
-  - {fileID: 11400000, guid: b2e856696bd07bd49a69744f7191c5e3, type: 2}
-  - {fileID: 11400000, guid: 6587359c444b02641b5ec9c0e22e9e84, type: 2}
-  maxCoins: 100
-  maxHeight: 4.5
-  XOffset: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,7 +816,7 @@ GameObject:
   - component: {fileID: 601627617}
   - component: {fileID: 601627619}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: CircularMovementObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -938,7 +886,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &601627619
 MonoBehaviour:
@@ -1327,7 +1275,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1206402050
 MonoBehaviour:
@@ -1480,7 +1428,7 @@ GameObject:
   - component: {fileID: 1540504740}
   - component: {fileID: 1540504739}
   m_Layer: 0
-  m_Name: BubbleSpawner
+  m_Name: LevelGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1498,12 +1446,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e920177f353981a4c99c181fb3cabdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefabs:
-  - {fileID: 4397240384071086403, guid: da051cc026cb18a4dad36c93ca38fb02, type: 3}
+  bubblePrefab: {fileID: 4397240384071086403, guid: da051cc026cb18a4dad36c93ca38fb02,
+    type: 3}
+  minBubbles: 4
+  minBubbleDist: 7
+  maxBubbleDist: 12
+  coinPrefab: {fileID: 1641566331239349926, guid: ef11a43300571444b9cfc3272dd9c3cb,
+    type: 3}
+  coinFormations:
+  - {fileID: 11400000, guid: 6587359c444b02641b5ec9c0e22e9e84, type: 2}
+  - {fileID: 11400000, guid: b2e856696bd07bd49a69744f7191c5e3, type: 2}
+  minCoins: 15
+  obstaclePrefabs: []
   pool: {fileID: 286083062}
-  xOffset: 7
-  maxHeight: 4.5
-  maxBubbles: 30
+  maxHeight: 4.75
 --- !u!4 &1540504740
 Transform:
   m_ObjectHideFlags: 0
@@ -1512,7 +1468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540504738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1616,7 +1572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1807985959
 Transform:
   m_ObjectHideFlags: 0
@@ -1744,7 +1700,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1824208324
 BoxCollider2D:
