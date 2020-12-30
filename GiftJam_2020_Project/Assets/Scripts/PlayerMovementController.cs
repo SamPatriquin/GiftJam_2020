@@ -15,6 +15,7 @@ public class PlayerMovementController : MonoBehaviour
     public bool isValidMove { get; private set; } = false;
     private bool isMoveReleased = false;
     private bool isSecondJumpUsed = false;
+    private float clampMouseVector = 3f;
 
     private Vector2 mousePos;
 
@@ -26,7 +27,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void FixedUpdate() {
         if (isValidMove) {
-            launchVelocity = ((Vector2)this.transform.position - mousePos) * onPlayerWithBubble.currentBubble.launchMultiplier * Time.deltaTime;
+            launchVelocity = Vector2.ClampMagnitude(((Vector2)this.transform.position - mousePos), clampMouseVector) * onPlayerWithBubble.currentBubble.launchMultiplier * Time.deltaTime;
         }
         if (isMoveReleased) {
             playerRigidBody.isKinematic = false;
