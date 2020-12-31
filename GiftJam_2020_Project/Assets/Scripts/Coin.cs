@@ -5,8 +5,7 @@ public class Coin : MonoBehaviour {
     [SerializeField] private int value;
     
     private Score score;
-
-    public LevelGenerator spawnedFrom {get; set;}
+    private ObjectPool pool;
     private Transform playerTransform;
 
     private void Awake() {
@@ -14,16 +13,18 @@ public class Coin : MonoBehaviour {
         if (score == null) { Debug.LogError("coin unable to find a reference to Score"); }
         PlayerMovementController player = FindObjectOfType<PlayerMovementController>();
         if (player != null) { playerTransform = player.transform; }
+        pool = FindObjectOfType<ObjectPool>();
+        if (pool == null) { return; }
     }
 
     private void Update() {
-        if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { spawnedFrom.despawnCoin(this.gameObject); }
+        if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { pool.ReturnObject(this.gameObject); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.GetComponent<PlayerMovementController>()) {
             score.IncreaseScore(this.value);
-            spawnedFrom.despawnCoin(this.gameObject);
+            pool.ReturnObject(this.gameObject);
         }
     }
 }

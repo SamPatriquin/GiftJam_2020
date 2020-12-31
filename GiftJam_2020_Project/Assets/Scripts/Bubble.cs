@@ -6,7 +6,7 @@ public class Bubble : MonoBehaviour
 {
     [SerializeField] private float _launchMultiplier = 5f;
 
-    public LevelGenerator spawnedFrom { get; set; }
+    private ObjectPool pool;
     private Transform playerTransform;
 
     public float launchMultiplier {
@@ -16,15 +16,17 @@ public class Bubble : MonoBehaviour
     private void Awake() {
         PlayerMovementController player = FindObjectOfType<PlayerMovementController>();
         if (player != null) { playerTransform = player.transform; }
+        pool = FindObjectOfType<ObjectPool>();
+        if (pool == null) { return; }
     }
-
+ 
     private void Update() {
-        if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { spawnedFrom.despawnBubble(this.gameObject); }
+        if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { pool.ReturnObject(this.gameObject); }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.GetComponent<PlayerMovementController>()) {
-            spawnedFrom.despawnBubble(this.gameObject);
+            pool.ReturnObject(this.gameObject);
         }
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine;
 public class UpDownObstacle : MonoBehaviour, IObstacle
 {
     [SerializeField] private float amp = 5f;
+
     private float periodInSec;
     private float cycle;
     private float startingPosY;
     private Transform playerTransform;
-    public LevelGenerator spawnedFrom { get; set; }
+    private ObjectPool pool;
 
     private void Awake() {
         periodInSec = Random.Range(1.5f, 4f);
@@ -17,11 +18,13 @@ public class UpDownObstacle : MonoBehaviour, IObstacle
         startingPosY = transform.position.y;
         PlayerMovementController player = FindObjectOfType<PlayerMovementController>();
         if (player != null) { playerTransform = player.transform; }
+        pool = FindObjectOfType<ObjectPool>();
+        if (pool == null) { return; }
     }
 
     void Update(){
         float offset = Mathf.Sin(cycle * Time.time) * amp;
         this.transform.position = new Vector2(this.transform.position.x, startingPosY + offset);
-        if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { spawnedFrom.despawnObstacle(this.gameObject); }
+        if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { pool.ReturnObject(this.gameObject); }
     }
 }
