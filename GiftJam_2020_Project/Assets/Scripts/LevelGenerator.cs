@@ -6,12 +6,11 @@ public class LevelGenerator : MonoBehaviour {
 
     [Header("Bubbles")]
     [SerializeField] private GameObject bubblePrefab;
-    [SerializeField] private float minBubbles;
+    [SerializeField] private int minBubbles;
 
     [Header("Coins")]
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private CoinFormation[] coinFormations;
-    [SerializeField] private float minCoins;
 
     [Header("Obstacles")]
     [SerializeField] private GameObject[] obstaclePrefabs;
@@ -26,17 +25,17 @@ public class LevelGenerator : MonoBehaviour {
     private Vector2 lastBubbleSpawnPos;
 
     private int numBubbles = 0;
-    private int numCoins = 0;
+
 
     private void Awake() {
         lastBubbleSpawnPos = SpawnBubble(Vector2.zero);
     }
 
     private void Update() {
-        print(numCoins);
         if (numBubbles < minBubbles) {
             lastBubbleSpawnPos = SpawnBubble(new Vector2(lastBubbleSpawnPos.x + Random.Range(minSpawnDist, maxSpawnDist), Random.Range(-maxHeight, maxHeight)));
-            SpawnCoinFormation(new Vector2(lastBubbleSpawnPos.x + Random.Range(minSpawnDist, maxSpawnDist) / 2, Random.Range(lastBubbleSpawnPos.y - 1, lastBubbleSpawnPos.y + 1)));
+            SpawnCoinFormation(new Vector2(lastBubbleSpawnPos.x + Random.Range(minSpawnDist, maxSpawnDist) / 2, Random.Range(-maxHeight/2, maxHeight/2)));
+            SpawnObstacle(new Vector2(lastBubbleSpawnPos.x + Random.Range(minSpawnDist, maxSpawnDist) / 2, Random.Range(-maxHeight / 2, maxHeight / 2)));
         }
     }
 
@@ -56,11 +55,14 @@ public class LevelGenerator : MonoBehaviour {
             Coin coinComponent = coin.GetComponent<Coin>();
             if (coinComponent != null) { coinComponent.spawnedFrom = this; }
             coin.transform.position = spawnAt + pos;
-            ++numCoins;
         }
     }
 
-    private void SpawnObstacle() {
+    private void SpawnObstacle(Vector2 spawnAt) {
+        GameObject obstacle = pool.GetObject(obstaclePrefabs[0]);
+        UpDownObstacle upDownObstacle = obstacle.GetComponent<UpDownObstacle>();
+        if (upDownObstacle != null) { upDownObstacle.spawnedFrom = this; }
+        obstacle.transform.position = spawnAt;
     }
 
     public void despawnBubble(GameObject bubble) {
@@ -69,7 +71,10 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     public void despawnCoin(GameObject coin) {
-        --numCoins;
         pool.ReturnObject(coin);
+    }
+
+    public void despawnObstacle(GameObject obstacle) {
+        pool.ReturnObject(obstacle);
     }
 }

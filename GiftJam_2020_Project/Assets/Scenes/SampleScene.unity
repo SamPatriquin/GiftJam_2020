@@ -1449,8 +1449,6 @@ MonoBehaviour:
   bubblePrefab: {fileID: 4397240384071086403, guid: da051cc026cb18a4dad36c93ca38fb02,
     type: 3}
   minBubbles: 4
-  minBubbleDist: 7
-  maxBubbleDist: 12
   coinPrefab: {fileID: 1641566331239349926, guid: ef11a43300571444b9cfc3272dd9c3cb,
     type: 3}
   coinFormations:
@@ -1459,7 +1457,9 @@ MonoBehaviour:
   minCoins: 15
   obstaclePrefabs: []
   pool: {fileID: 286083062}
-  maxHeight: 4.75
+  maxHeight: 4.5
+  minSpawnDist: 7
+  maxSpawnDist: 12
 --- !u!4 &1540504740
 Transform:
   m_ObjectHideFlags: 0
@@ -2225,8 +2225,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.13558997, y: 0.018546332}
-  m_Size: {x: 0.9333621, y: 0.4253043}
+  m_Offset: {x: -0.13558996, y: 0.097112805}
+  m_Size: {x: 0.93336236, y: 0.70997435}
   m_Direction: 1
 --- !u!50 &2017748823
 Rigidbody2D:
