@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class CircleMovementObstacle : MonoBehaviour, IObstacle
 {
+
+    public Vector2 spawnedAt { get; set; } = Vector2.zero;
+
     private float radius = 1f;
     private float periodInSec = 1f;
     private float cycle;
-    private float startingX, startingY = 0f;
     private Transform playerTransform;
     private ObjectPool pool;
 
     private void Awake() {
-        radius = Random.Range(1f, 2f);
-        periodInSec = Random.Range(1f, 2f);
+        radius = Random.Range(.5f, 1f);
+        periodInSec = Random.Range(2f, 3f);
         cycle = (Mathf.PI * 2) / periodInSec;
         PlayerMovementController player = FindObjectOfType<PlayerMovementController>();
         if (player != null) { playerTransform = player.transform; }
@@ -21,20 +23,10 @@ public class CircleMovementObstacle : MonoBehaviour, IObstacle
         if (pool == null) { return; }
     }
 
-    private void Start() { //Needs to be after initialized from pool
-        startingX = this.transform.position.x;
-        startingY = this.transform.position.y;
-    }
-
-    private void OnEnable() { //Done every reuse from pool
-        startingX = this.transform.position.x;
-        startingY = this.transform.position.y;
-    }
-
     void Update(){
         float xOffset = Mathf.Cos(cycle * Time.time) * radius;
         float yOffset = Mathf.Sin(cycle * Time.time) * radius;
-        this.transform.position = new Vector2(startingX + xOffset, startingY + yOffset);
+        this.transform.position = new Vector2(spawnedAt.x + xOffset, spawnedAt.y + yOffset);
         if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { pool.ReturnObject(this.gameObject); }
     }
 }

@@ -6,6 +6,8 @@ public class UpDownObstacle : MonoBehaviour, IObstacle
 {
     [SerializeField] private float amp = 5f;
 
+    public Vector2 spawnedAt { get; set; } = Vector2.zero;
+
     private float periodInSec;
     private float cycle;
     private float startingPosY;
@@ -15,7 +17,6 @@ public class UpDownObstacle : MonoBehaviour, IObstacle
     private void Awake() {
         periodInSec = Random.Range(1.5f, 4f);
         cycle = (Mathf.PI * 2) / periodInSec;
-        startingPosY = transform.position.y;
         PlayerMovementController player = FindObjectOfType<PlayerMovementController>();
         if (player != null) { playerTransform = player.transform; }
         pool = FindObjectOfType<ObjectPool>();
@@ -24,7 +25,7 @@ public class UpDownObstacle : MonoBehaviour, IObstacle
 
     void Update(){
         float offset = Mathf.Sin(cycle * Time.time) * amp;
-        this.transform.position = new Vector2(this.transform.position.x, startingPosY + offset);
+        this.transform.position = new Vector2(this.transform.position.x, offset);
         if (this.transform.position.magnitude - playerTransform.position.magnitude <= -10) { pool.ReturnObject(this.gameObject); }
     }
 }

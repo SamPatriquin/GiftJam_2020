@@ -1239,6 +1239,66 @@ MonoBehaviour:
   numPoints: 3
   distBetweenPoints: 0.1
   pointSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!1 &1336296880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1336296881}
+  - component: {fileID: 1336296882}
+  - component: {fileID: 1336296883}
+  m_Layer: 0
+  m_Name: ObstacleHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1336296881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336296880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2017748820}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1336296882
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336296880}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.0001
+--- !u!114 &1336296883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336296880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7c1a65731b7df41905db9ec41aa903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1429541679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,8 +1418,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6587359c444b02641b5ec9c0e22e9e84, type: 2}
   - {fileID: 11400000, guid: b2e856696bd07bd49a69744f7191c5e3, type: 2}
   obstaclePrefabs:
-  - {fileID: 1385907713487074004, guid: 158242511dfd7094a83970ed6103b6de, type: 3}
   - {fileID: 6609004237315486165, guid: c524fd14a0a7507498caa2a23f0d7d35, type: 3}
+  - {fileID: 1385907713487074004, guid: 158242511dfd7094a83970ed6103b6de, type: 3}
   pool: {fileID: 286083062}
   spawnAhead: 20
   maxHeight: 4.5
@@ -1882,7 +1942,6 @@ GameObject:
   - component: {fileID: 2017748819}
   - component: {fileID: 2017748821}
   - component: {fileID: 2017748824}
-  - component: {fileID: 2017748825}
   - component: {fileID: 2017748823}
   - component: {fileID: 2017748822}
   m_Layer: 0
@@ -1930,14 +1989,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2067371645
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 03d802adafa8ae649bcb6137d7d15332, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4b9edc7b825c4440955f4edb301116a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3, y: 1}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1955,6 +2014,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1324318211}
+  - {fileID: 1336296881}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1981,11 +2041,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.13558996, y: 0.097112805}
-  m_Size: {x: 0.93336236, y: 0.70997435}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.0001, y: 1.41}
   m_Direction: 1
 --- !u!50 &2017748823
 Rigidbody2D:
@@ -2018,18 +2078,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31c06186c2467dd4f8e1033314525eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2017748825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017748818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7c1a65731b7df41905db9ec41aa903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2098443506

@@ -56,5 +56,7 @@ public class LevelGenerator : MonoBehaviour {
     private void SpawnObstacle(Vector2 spawnAt) {
         GameObject obstacle = pool.GetObject(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)]);
         obstacle.transform.position = spawnAt;
+        IObstacle _obstacle = obstacle.GetComponent<IObstacle>();
+        _obstacle.spawnedAt = spawnAt;
     }
 }
