@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7238726fb8501a4ea4a824ecd27cf68, type: 3}
-  m_Name: Star
+  m_Name: X
   m_EditorClassIdentifier: 
   coinPositons:
   - {x: 0, y: 0}
-  - {x: 0, y: 0.5}
-  - {x: 0.5, y: 0}
-  - {x: 0, y: -0.5}
-  - {x: -0.5, y: 0}
+  - {x: -0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: -0.5, y: -0.5}
+  - {x: 0.5, y: -0.5}

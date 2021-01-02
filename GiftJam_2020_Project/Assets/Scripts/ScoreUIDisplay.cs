@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreUIDisplay : MonoBehaviour
-{
+public class ScoreUIDisplay : MonoBehaviour {
     [SerializeField] Score score;
 
     private Text text;
 
     private void Awake() {
-        text = this.GetComponent<Text>();
+        text = this.GetComponentInChildren<Text>();
         text.text = "0";
+        score.OnScoreIncrease += IncreaseScore;
     }
 
-    private void Update() {
-        if (text.text != score.value.ToString()) {
-            text.text = score.value.ToString();
-        }
+    private void IncreaseScore(int score) {
+        text.text = score.ToString();
     }
 }
