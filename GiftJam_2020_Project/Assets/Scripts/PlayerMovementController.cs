@@ -6,18 +6,19 @@ public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private float secondJumpMult = 2f;
 
+    public Vector2 launchVelocity { get; private set; }
+    public bool isBubbleLaunch { get; private set; } = false;
+    public bool isSecondLaunch { get; private set; } = false;
+
     private Rigidbody2D playerRigidBody;
     private Collider2D playerCollider;
     private Transform playerTransform;
     private OnPlayerWithBubble onPlayerWithBubble;
-
-    public Vector2 launchVelocity { get; private set; }
-    public bool isBubbleLaunch { get; private set; } = false;
+    private Animator animator;
+    private int animatorIsLaunched = Animator.StringToHash("isLaunched");
     private bool isMoveReleased = false;
     private bool isSecondLaunchAvailable = false;
-    public bool isSecondLaunch { get; private set; } = false;
     private float clampMouseVector = 3f;
-
     private Vector2 mousePos;
 
     private void Awake() {
@@ -25,6 +26,7 @@ public class PlayerMovementController : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
         playerTransform = GetComponent<Transform>();
         onPlayerWithBubble = GetComponent<OnPlayerWithBubble>();
+        animator = GetComponent<Animator>();
     }
     private void FixedUpdate() {
         if (isBubbleLaunch || isSecondLaunch) {
@@ -49,7 +51,10 @@ public class PlayerMovementController : MonoBehaviour
     private void Update() {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (onPlayerWithBubble.isPlayerInBubble) { isSecondLaunchAvailable = true; }
+        if (onPlayerWithBubble.isPlayerInBubble) { 
+            isSecondLaunchAvailable = true;
+            animator.SetBool(animatorIsLaunched, false);
+        }
 
         if (Input.GetMouseButtonDown(0)) {
             isBubbleLaunch = playerCollider.OverlapPoint(mousePos) && onPlayerWithBubble.isPlayerInBubble;
@@ -59,6 +64,7 @@ public class PlayerMovementController : MonoBehaviour
         if ((isBubbleLaunch || isSecondLaunch) && Input.GetMouseButtonUp(0)) {
             isMoveReleased = true;
             onPlayerWithBubble.isPlayerInBubble = false;
+            animator.SetBool(animatorIsLaunched, true);
         }
     }
 }
