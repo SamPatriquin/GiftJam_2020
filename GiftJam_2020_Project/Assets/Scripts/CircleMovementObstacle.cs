@@ -14,13 +14,19 @@ public class CircleMovementObstacle : MonoBehaviour, IObstacle
     private ObjectPool pool;
 
     private void Awake() {
-        radius = Random.Range(.5f, 1f);
-        periodInSec = Random.Range(2f, 3f);
-        cycle = (Mathf.PI * 2) / periodInSec;
         PlayerMovementController player = FindObjectOfType<PlayerMovementController>();
         if (player != null) { playerTransform = player.transform; }
         pool = FindObjectOfType<ObjectPool>();
         if (pool == null) { return; }
+        radius = Random.Range(.5f, 1.5f);
+        periodInSec = Random.Range(2f, 3f);
+        cycle = (Mathf.PI * 2) / periodInSec;
+    }
+
+    private void onEnable() {
+        radius = Random.Range(.5f, 1.5f);
+        periodInSec = Random.Range(2f, 3f);
+        cycle = (Mathf.PI * 2) / periodInSec;
     }
 
     void Update(){
