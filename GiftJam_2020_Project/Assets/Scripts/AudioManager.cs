@@ -11,6 +11,10 @@ public class AudioManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake(){
+        AudioManager[] objs = FindObjectsOfType<AudioManager>();
+        if (objs.Length > 1) {
+            Destroy(this.gameObject);
+        }
         foreach (AudioClip clip in clips) {
             AudioSource source = gameObject.AddComponent<AudioSource>();
             source.clip = clip;

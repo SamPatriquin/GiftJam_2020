@@ -4,10 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    private void Awake() {
+        GameManager[] objs = FindObjectsOfType<GameManager>();
+        if (objs.Length > 1) {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     public void StartGame() {
         SceneManager.LoadScene(1);
         print("starting game");
     }
+
     public void GameOver() {
         SceneManager.LoadScene(1);
     }
