@@ -15,6 +15,7 @@ public class PlayerMovementController : MonoBehaviour
     private Transform playerTransform;
     private OnPlayerWithBubble onPlayerWithBubble;
     private Animator animator;
+    private AudioManager audioManager;
     private int animatorIsLaunched = Animator.StringToHash("isLaunched");
     private bool isMoveReleased = false;
     private bool isSecondLaunchAvailable = false;
@@ -27,6 +28,7 @@ public class PlayerMovementController : MonoBehaviour
         playerTransform = GetComponent<Transform>();
         onPlayerWithBubble = GetComponent<OnPlayerWithBubble>();
         animator = GetComponent<Animator>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     private void FixedUpdate() {
         if (isBubbleLaunch || isSecondLaunch) {
@@ -36,6 +38,7 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
         if (isMoveReleased) {
+            audioManager.PlaySoundLoop("spinning", this.gameObject);
             playerRigidBody.isKinematic = false;
             playerRigidBody.velocity = launchVelocity;
             isMoveReleased = false;

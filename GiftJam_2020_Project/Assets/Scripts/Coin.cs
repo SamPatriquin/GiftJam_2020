@@ -7,6 +7,7 @@ public class Coin : MonoBehaviour {
     private Score score;
     private ObjectPool pool;
     private Transform playerTransform;
+    private AudioManager audioManager;
 
     private void Awake() {
         score = FindObjectOfType<Score>();
@@ -15,6 +16,7 @@ public class Coin : MonoBehaviour {
         if (player != null) { playerTransform = player.transform; }
         pool = FindObjectOfType<ObjectPool>();
         if (pool == null) { return; }
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update() {
@@ -24,6 +26,7 @@ public class Coin : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.GetComponent<PlayerMovementController>()) {
             score.IncreaseScore(this.value);
+            audioManager.PlayOneShotSound("pearlPickup", this.gameObject);
             pool.ReturnObject(this.gameObject);
         }
     }

@@ -6,6 +6,7 @@ public class Bubble : MonoBehaviour
 {
     [SerializeField] private float _launchMultiplier = 5f;
 
+    private AudioManager audioManager;
     private ObjectPool pool;
     private Transform playerTransform;
 
@@ -15,6 +16,7 @@ public class Bubble : MonoBehaviour
 
     private void Awake() {
         PlayerMovementController player = FindObjectOfType<PlayerMovementController>();
+        audioManager = FindObjectOfType<AudioManager>();
         if (player != null) { playerTransform = player.transform; }
         pool = FindObjectOfType<ObjectPool>();
         if (pool == null) { return; }
@@ -26,6 +28,7 @@ public class Bubble : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.GetComponent<PlayerMovementController>()) {
+            audioManager.PlayOneShotSound("bubble", this.gameObject);
             pool.ReturnObject(this.gameObject);
         }
     }
