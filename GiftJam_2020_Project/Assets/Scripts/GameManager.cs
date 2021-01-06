@@ -4,20 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-    private void Awake() {
-        GameManager[] objs = FindObjectsOfType<GameManager>();
-        if (objs.Length > 1) {
-            Destroy(this.gameObject);
-        }
-        DontDestroyOnLoad(this.gameObject);
+
+    private AudioManager audioManager;
+
+    private void Start() { //Preload
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.PlaySound("mainTheme", this.gameObject);
+        SceneManager.LoadScene(1);
+    }
+
+    private void Update() {
     }
 
     public void StartGame() {
-        SceneManager.LoadScene(1);
-        print("starting game");
+        SceneManager.LoadScene(2);
     }
 
     public void GameOver() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }

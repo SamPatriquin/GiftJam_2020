@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Sound{
+public class Sound {
 
-    [SerializeField] private AudioClip clip;
-    public AudioSource source { get; private set; }
-    public string name { get; private set; }
-
-    public Sound(AudioSource source) {
-        this.source = source;
-    }
-
+    [SerializeField] public AudioClip clip;
+    [SerializeField] [Range(0.0f, 1.0f)] public float volume = 0f;
+    [SerializeField] public bool isLoop  = false;
+    public AudioSource source;
 }
